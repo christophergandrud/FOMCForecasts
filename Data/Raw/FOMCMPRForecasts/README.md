@@ -16,6 +16,6 @@ The variables other than `ForecastDate` use the following coding scheme:
 
 	- `Inflation`: Core CPE price index change
 	- `GDP`: real GDP change
-	- `Unemp`: Civilian unemployment
+	- `Unem`: Civilian unemployment
 	
 - The final letter is either an `L` for the lower bound of the prediction or `H` for the higher bound.
