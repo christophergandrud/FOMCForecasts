@@ -8,5 +8,6 @@
 	
 For the keywords `inflation`, `GDP`, and `unemployment`.
 
+
 - Coded forecasts for the quantities by either taking the lower and upper numerical bounds given or using a fuzzy verbal scale: low, moderate, high.
 
