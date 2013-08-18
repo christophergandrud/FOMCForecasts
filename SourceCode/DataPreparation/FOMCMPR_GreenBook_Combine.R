@@ -1,17 +1,22 @@
 ###########
 # Combine FOMC Monetary Policy Report with Greenbook Paper 
 # Christopher Gandrud
-# 17 August 2013
+# 18 August 2013
 ###########
 
 # Load packages
 library(quantmod)
+library(plyr)
+library(ggplot2)
+library(gridExtra)
 
 #### Download actual data from FRED ####
-# CPIAUCSL = Consumer Price Index for All Urban Consumers
+# CPIAUCNS = Consumer Price Index for All Urban Consumers: All Items 
 # PCEPI = Personal Consumption Expenditures: Chain-type Price Index
-# DPCCRC1M027SBEA = Personal consumption expenditures excluding food and energy 
-Symbols <- c("CPIAUCSL", "PCEPI", "DPCCRC1M027SBEA")
+# PCEPILFE = Personal consumption expenditures excluding food and energy (chain-type price index)
+# GDPC96 = Real Gross Domestic Product, 3 Decimal
+# UNRATE = Civilian Unemployment Rate
+Symbols <- c("CPIAUCNS", "PCEPI", "PCEPILFE", "GDPC96", "UNRATE")
 
 ToDF <- function(x){
   
@@ -38,52 +43,132 @@ ToDF <- function(x){
 CombinedInflation <- ToDF(Symbols)
 
 # Find average change per quarter 
-quarter_change <- function(data, Var, TimeVar, NewVar = NULL)
+quarter_change <- function(data, Var, TimeVar, NewVar = NULL, NoChange = FALSE)
 {
   require(lubridate)
   require(plyr)
   require(DataCombine)
   data$Quarter <- quarter(data[, TimeVar], with_year = TRUE)
-  data <- data[, c("Quarter", Var)]
-  names(data) <- c("Quarter", "TempVar")
-  MeanTemp <- ddply(data, .(Quarter), transform, MeanVar = mean(TempVar))
-  MeanTemp <- MeanTemp[, c(1, 3)]
-  MeanTemp <- MeanTemp[!duplicated(MeanTemp[, 1], MeanTemp[, 2]), ]
-  MeanTemp <- slide(data = MeanTemp, Var = "MeanVar", slideBy = -4, 
-                    NewVar = "Lag")
-  MeanTemp$ChangeTemp <- ((MeanTemp$MeanVar - MeanTemp$Lag)/MeanTemp$Lag) * 100 
-  MeanTemp <- MeanTemp[, c(1, 4)]
+  data <- data[, c(TimeVar, "Quarter", Var)]
+  names(data) <- c("Date", "Quarter", "TempVar")
+
+    MeanTemp <- ddply(data, .(Quarter), transform, MeanVar = mean(TempVar, 
+                                                                  na.rm = TRUE))
+    MeanTemp <- MeanTemp[, c(1:2, 4)]
+    MeanTemp <- MeanTemp[!duplicated(MeanTemp[, 2], MeanTemp[, 3]), ]
+  if (!isTRUE(NoChange)){
+    MeanTemp <- slide(data = MeanTemp, Var = "MeanVar", slideBy = -4, 
+                      NewVar = "Lag")
+    MeanTemp$ChangeTemp <- ((MeanTemp$MeanVar - MeanTemp$Lag)/MeanTemp$Lag) * 100
+  }
+  MeanTemp <- subset(MeanTemp, quarter(Date) == 4)
+  MeanTemp$year <- year(MeanTemp$Date)
+  if (!isTRUE(NoChange)){
+    MeanTemp <- MeanTemp[, c(6, 5)]
+  }
+  else if (isTRUE(NoChange)){
+    MeanTemp <- MeanTemp[, c(4, 3)]
+  }
   if (!is.null(NewVar)){
-    names(MeanTemp) <- c("Quarter", NewVar)
+    names(MeanTemp) <- c("year", NewVar)
     return(MeanTemp)
   } else
     return(MeanTemp)
 }
 
-QCPI <- quarter_change(data = CombinedInflation, Var = "CPIAUCSL", 
+QCPI <- quarter_change(data = CombinedInflation, Var = "CPIAUCNS", 
                      TimeVar = "DateField", NewVar = "ObsInflation")
 QPCE <- quarter_change(data = CombinedInflation, Var = "PCEPI", 
                      TimeVar = "DateField", NewVar = "ObsInflation")
-QPCECore <- quarter_change(data = CombinedInflation, Var = "DPCCRC1M027SBEA", 
+QPCECore <- quarter_change(data = CombinedInflation, Var = "PCEPILFE", 
                      TimeVar = "DateField", NewVar = "ObsInflation")
+GDP <- quarter_change(data = CombinedInflation, Var = "GDPC96", 
+                        TimeVar = "DateField", NewVar = "ObsGDP")
+Unemp <- quarter_change(data = CombinedInflation, Var = "UNRATE", 
+                        TimeVar = "DateField", NewVar = "ObsUnemp",
+                        NoChange = TRUE)
+
+
 
 # Keep only quarters and years used by FOMC
 # February Same Year
-QCPI <- subset(QCPI, Quarter < 2000)
-QPCE <- subset(QPCE, Quarter >= 2000)
-QPCE <- subset(QPCE, Quarter < 2005)
-QPCECore <- subset(QPCECore, Quarter >= 2004)
+QCPIF <- subset(QCPI, year < 2000)
+QPCEF <- subset(QPCE, year >= 2000)
+QPCEF <- subset(QPCEF, year < 2005)
+QPCECoreF <- subset(QPCECore, year >= 2005)
 
-FebInfl <- rbind(QCPI, QPCE, QPCECore)
-names(FebInfl) <- c("Quarter", "ObsInfFebSame")
+FebInfl <- rbind(QCPIF, QPCEF, QPCECoreF)
+names(FebInfl) <- c("year", "ObsInfFebSame")
+FebInfl <- merge(FebInfl, GDP, by = "year")
+FebInfl <- merge(FebInfl, Unemp, by = "year")
+
 
 # July Same Year
-QCPI <- subset(QCPI, Quarter < 2000)
-QPCE <- subset(QPCE, Quarter >= 2000)
-QPCE <- subset(QPCE, Quarter < 2004)
-QPCECore <- subset(QPCECore, Quarter >= 2004)
+QCPIJ <- subset(QCPI, year < 2000)
+QPCEJ <- subset(QPCE, year >= 2000)
+QPCEJ <- subset(QPCEJ, year < 2004)
+QPCECoreJ <- subset(QPCECore, year >= 2004)
 
-JulyInfl <- rbind(QCPI, QPCE, QPCECore)
-names(FebInfl) <- c("Quarter", "ObsInfJulySame")
+JulyInfl <- rbind(QCPIJ, QPCEJ, QPCECoreJ)
+names(JulyInfl) <- c("year", "ObsInfJulySame")
+JulyInfl <- merge(JulyInfl, GDP, by = "year")
+JulyInfl <- merge(JulyInfl, Unemp, by = "year")
 
-SameYearInfl <- merge(FebInfl, JulyInfl)
+# Merge with FOMC Inflation Predictions
+#### Load same year forecasts ####
+SameYear <- read.csv("/git_repositories/FOMCForecasts/Data/Raw/FOMCMPRForecasts/SameYear.csv", stringsAsFactors = FALSE)
+
+# Convert date
+SameYear$ForecastDate <- dmy(SameYear$ForecastDate)
+
+# Only February or July Predictions
+SameYearFeb <- subset(SameYear, month(ForecastDate) == 2)
+SameYearJul <- subset(SameYear, month(ForecastDate) == 7)
+
+# Extract only the year
+SameYearFeb$year <- year(SameYearFeb$ForecastDate)
+SameYearJul$year <- year(SameYearJul$ForecastDate)
+
+SameYearFeb <- merge(SameYearFeb, FebInfl, by = "year", all.x = TRUE)
+SameYearJul <- merge(SameYearJul, JulyInfl, by = "year", all.x = TRUE)
+
+# Create inflation forecast graphs
+Plot1 <- ggplot(data = SameYearFeb, aes(x = year, y = ObsInfFebSame)) +
+        geom_line() +
+        geom_ribbon(aes(ymin = SInflationL, ymax = SInflationH), alpha = 0.2) +
+        geom_ribbon(aes(ymin = SCInflationL, ymax = SCInflationH), alpha = 0.2) +
+        ylab("Inflation\n") + xlab("") + ggtitle("Forecast Made in February\n") + theme_bw()
+
+Plot2 <- ggplot(data = SameYearJul, aes(x = year, y = ObsInfJulySame)) +
+        geom_line() +
+        geom_ribbon(aes(ymin = SInflationL, ymax = SInflationH), alpha = 0.2) +
+        geom_ribbon(aes(ymin = SCInflationL, ymax = SCInflationH), alpha = 0.2) +
+        ylab("") + xlab("") + ggtitle("Forecast Made in July\n") + theme_bw()
+
+# Create GDP forecast graphs
+Plot3 <- ggplot(data = SameYearFeb, aes(x = year, y = ObsGDP)) +
+        geom_line() +
+        geom_ribbon(aes(ymin = SGDPL, ymax = SGDPH), alpha = 0.2) +
+        geom_ribbon(aes(ymin = SCGDPL, ymax = SCGDPH), alpha = 0.2) +
+        ylab("GDP Growth\n") + xlab("") + theme_bw()
+
+Plot4 <- ggplot(data = SameYearJul, aes(x = year, y = ObsGDP)) +
+        geom_line() +
+        geom_ribbon(aes(ymin = SGDPL, ymax = SGDPH), alpha = 0.2) +
+        geom_ribbon(aes(ymin = SCGDPL, ymax = SCGDPH), alpha = 0.2) +
+        ylab("") + xlab("") + theme_bw()
+
+# Create Unemployment forecast graphs
+Plot5 <- ggplot(data = SameYearFeb, aes(x = year, y = ObsUnemp)) +
+        geom_line() +
+        geom_ribbon(aes(ymin = SUnemL, ymax = SUnemH), alpha = 0.2) +
+        geom_ribbon(aes(ymin = SCUnemL, ymax = SCUnemH), alpha = 0.2) +
+        ylab("Unemployment\n") + xlab("") + theme_bw()
+
+Plot6 <- ggplot(data = SameYearJul, aes(x = year, y = ObsUnemp)) +
+        geom_line() +
+        geom_ribbon(aes(ymin = SUnemL, ymax = SUnemH), alpha = 0.2) +
+        geom_ribbon(aes(ymin = SCUnemL, ymax = SCUnemH), alpha = 0.2) +
+        ylab("") + xlab("") + theme_bw()
+
+grid.arrange(Plot1, Plot2, Plot3, Plot4, Plot5, Plot6)
