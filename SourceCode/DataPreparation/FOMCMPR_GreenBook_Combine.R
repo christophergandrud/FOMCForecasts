@@ -11,12 +11,13 @@ library(DataCombine)
 
 
 #### Download actual data from FRED ####
+# GNPDEF = Gross National Product: Implicit Price Deflator 
 # CPIAUCNS = Consumer Price Index for All Urban Consumers: All Items 
 # PCEPI = Personal Consumption Expenditures: Chain-type Price Index
 # PCEPILFE = Personal consumption expenditures excluding food and energy (chain-type price index)
 # GDPC96 = Real Gross Domestic Product, 3 Decimal
 # UNRATE = Civilian Unemployment Rate
-Symbols <- c("CPIAUCNS", "PCEPI", "PCEPILFE", "GDPC96", "UNRATE")
+Symbols <- c("GNPDEF", "CPIAUCNS", "PCEPI", "PCEPILFE", "GDPC96", "UNRATE")
 
 ToDF <- function(x){
   
@@ -76,6 +77,8 @@ quarter_change <- function(data, Var, TimeVar, NewVar = NULL, NoChange = FALSE)
     return(MeanTemp)
 }
 
+GNPD <- quarter_change(data = CombinedInflation, Var = "GNPDEF", 
+                       TimeVar = "DateField", NewVar = "ObsInflation")
 QCPI <- quarter_change(data = CombinedInflation, Var = "CPIAUCNS", 
                      TimeVar = "DateField", NewVar = "ObsInflation")
 QPCE <- quarter_change(data = CombinedInflation, Var = "PCEPI", 
@@ -92,24 +95,28 @@ Unemp <- quarter_change(data = CombinedInflation, Var = "UNRATE",
 
 # Keep only quarters and years used by FOMC
 # February Same Year
-QCPIF <- subset(QCPI, year < 2000)
+GNPDF <- subset(GNPD, year < 1989)
+QCPIF <- subset(QCPI, year >= 1989)
+QCPIF <- subset(QCPIF, year < 2000)
 QPCEF <- subset(QPCE, year >= 2000)
 QPCEF <- subset(QPCEF, year < 2005)
 QPCECoreF <- subset(QPCECore, year >= 2005)
 
-FebInfl <- rbind(QCPIF, QPCEF, QPCECoreF)
+FebInfl <- rbind(GNPDF, QCPIF, QPCEF, QPCECoreF)
 names(FebInfl) <- c("year", "ObsInfFebSame")
 FebInfl <- merge(FebInfl, GDP, by = "year")
 FebInfl <- merge(FebInfl, Unemp, by = "year")
 
 
 # July Same Year
-QCPIJ <- subset(QCPI, year < 2000)
+GNPDJ <- subset(GNPD, year < 1989)
+QCPIJ <- subset(QCPI, year >= 1989)
+QCPIJ <- subset(QCPIJ, year < 2000)
 QPCEJ <- subset(QPCE, year >= 2000)
 QPCEJ <- subset(QPCEJ, year < 2004)
 QPCECoreJ <- subset(QPCECore, year >= 2004)
 
-JulyInfl <- rbind(QCPIJ, QPCEJ, QPCECoreJ)
+JulyInfl <- rbind(GNPDJ, QCPIJ, QPCEJ, QPCECoreJ)
 names(JulyInfl) <- c("year", "ObsInfJulySame")
 JulyInfl <- merge(JulyInfl, GDP, by = "year")
 JulyInfl <- merge(JulyInfl, Unemp, by = "year")
