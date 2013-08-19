@@ -1,8 +1,8 @@
 # Monetary Policy Committee Predictions Data set
 
-These data sets include predictions from the FOMC's Monetary Reports submitted to Congress biannually (February, July). The data was gathered from:
+These data sets include predictions from the FOMC's Monetary Policy Reports submitted to Congress biannually (February, July) as per the [Humphrey-Hawkins Act](http://en.wikipedia.org/wiki/Humphrey%E2%80%93Hawkins_Full_Employment_Act). The first forecasts were included in the July 1979 Monetary Policy Report. The data was gathered from:
 
-> **Through February 1996:** <http://fraser.stlouisfed.org/publication/?pid=672&tid=87>
+> **Through February 1996:** <http://fraser.stlouisfed.org/topics/?tid=87>
 
 > **From July 1996 onwards:** <http://www.federalreserve.gov/monetarypolicy/mpr_default.htm>
 
@@ -25,5 +25,5 @@ The variables other than `ForecastDate` use the following coding scheme:
 
 ### Notes
 
-- The estimates for forecasts from the February 1988 were poorly scanned and visual approximations were made. See the file at: <http://fraser.stlouisfed.org/docs/historical/senate/cmp/1980s/CMP_100S_02241988.pdf>.
+- The estimates for forecasts from the February 1988 were poorly scanned and visual approximations were made. The unemployment forecasts were completely uninterpretable. See the file at: <http://fraser.stlouisfed.org/docs/historical/senate/cmp/1980s/CMP_100S_02241988.pdf>.
 

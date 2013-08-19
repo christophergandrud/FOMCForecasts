@@ -15,9 +15,10 @@ library(DataCombine)
 # CPIAUCNS = Consumer Price Index for All Urban Consumers: All Items 
 # PCEPI = Personal Consumption Expenditures: Chain-type Price Index
 # PCEPILFE = Personal consumption expenditures excluding food and energy (chain-type price index)
+# GNPC96 = Real Gross National Product 
 # GDPC96 = Real Gross Domestic Product, 3 Decimal
 # UNRATE = Civilian Unemployment Rate
-Symbols <- c("GNPDEF", "CPIAUCNS", "PCEPI", "PCEPILFE", "GDPC96", "UNRATE")
+Symbols <- c("GNPDEF", "CPIAUCNS", "PCEPI", "PCEPILFE", "GNPC96", "GDPC96", "UNRATE")
 
 ToDF <- function(x){
   
@@ -53,8 +54,8 @@ quarter_change <- function(data, Var, TimeVar, NewVar = NULL, NoChange = FALSE)
   data <- data[, c(TimeVar, "Quarter", Var)]
   names(data) <- c("Date", "Quarter", "TempVar")
 
-    MeanTemp <- ddply(data, .(Quarter), transform, MeanVar = mean(TempVar, 
-                                                                  na.rm = TRUE))
+    MeanTemp <- ddply(data, .(Quarter), transform, 
+                      MeanVar = mean(TempVar, na.rm = TRUE))
     MeanTemp <- MeanTemp[, c(1:2, 4)]
     MeanTemp <- MeanTemp[!duplicated(MeanTemp[, 2], MeanTemp[, 3]), ]
   if (!isTRUE(NoChange)){
@@ -85,6 +86,8 @@ QPCE <- quarter_change(data = CombinedInflation, Var = "PCEPI",
                      TimeVar = "DateField", NewVar = "ObsInflation")
 QPCECore <- quarter_change(data = CombinedInflation, Var = "PCEPILFE", 
                      TimeVar = "DateField", NewVar = "ObsInflation")
+GNP <- quarter_change(data = CombinedInflation, Var = "GNPC96", 
+                        TimeVar = "DateField", NewVar = "ObsGDP")
 GDP <- quarter_change(data = CombinedInflation, Var = "GDPC96", 
                         TimeVar = "DateField", NewVar = "ObsGDP")
 Unemp <- quarter_change(data = CombinedInflation, Var = "UNRATE", 
@@ -94,6 +97,10 @@ Unemp <- quarter_change(data = CombinedInflation, Var = "UNRATE",
 
 
 # Keep only quarters and years used by FOMC
+GNPSub <- subset(GNP, year < 1992)
+GDPSub <- subset(GDP, year >= 1992)
+GDP <- rbind(GNPSub, GDPSub)
+
 # February Same Year
 GNPDF <- subset(GNPD, year < 1989)
 QCPIF <- subset(QCPI, year >= 1989)

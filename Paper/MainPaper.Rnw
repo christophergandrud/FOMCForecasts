@@ -1,0 +1,73 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FOMC Forecasts
+% Christopher Gandrud
+% 19 August 2013
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% !Rnw weave = knitr
+
+\documentclass[a4paper]{article}
+\usepackage{fullpage}
+\usepackage[authoryear]{natbib}
+\usepackage{setspace}
+    \doublespacing
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=cyan,
+    urlcolor=cyan
+}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{todonotes}
+\usepackage[utf8]{inputenc} 
+
+% Set knitr global options
+<<ParentGlobalOpts, echo=FALSE>>=
+    opts_chunk$set(concordance=TRUE)
+    opts_chunk$set(fig.align='center')
+
+# Load packages and create package bibliography
+PkgsToLoad <- c("knitr")
+
+repmis::LoadandCite(pkgs = PkgsToLoad, file = "RPackages.bib")
+
+@
+
+%%%%%%% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{FOMC Governors' Expectations: Partisan Rules of Thumb and Policy Choices}
+
+\author{Christopher Gandrud \\
+                {\emph{Hertie School of Governance}}\footnote{Research Associate. Friedrichstra{\ss}er 180. 10117 Berlin, Germany. Email: \href{mailto:christopher.gandrud@gmail.com}{christopher.gandrud@gmail.com}. This paper was written using {\tt{knitr}} \citep{R-knitr}. It can be entirely replicated from data, analysis source code, and markup files available at: {\url{https://github.com/christophergandrud/FOMCForecasts}}.}}
+
+\begin{document}
+
+\maketitle
+
+%%%%%%% Abstract %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+    Expectations about future macroeconomic conditions such as inflation, growth and unemployment are important for monetary policymakers when they make decisions. What influences these expectations and to what extent do expectations effect policy choices? This paper aims to answer these questions with data on US Federal Open Markets Committee members' predictions from 1979 through 2013. FILL IN
+\end{abstract}
+
+ Expectations about future macroeconomic conditions such as inflation, growth and unemployment are important for monetary policymakers when they make decisions. FILL IN
+
+\section{Previous Work}
+
+A number of papers have recently attempted to understand some part of how monetary policymakers, particularly those on the FOMC, make predictions of future macroeconomic conditions. Most of these examine FOMC members' predictions published semi-annually as part of 
+
+%%%%%%% Main Paper %%%%%%%%%%%%
+
+%%%%%%% References %%%%%%%%%%%%
+
+\clearpage
+
+\bibliographystyle{apsr}
+\bibliography{MainBib, RPackages}
+
+
+\end{document}
