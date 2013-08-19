@@ -31,5 +31,6 @@
 *.vrb
 *.xdy
 *.tdo
+*concordance.tex
 Paper/cache/*
 Paper/figure/*
