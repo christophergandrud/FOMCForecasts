@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % FOMC Forecasts
 % Christopher Gandrud
-% 20 August 2013
+% 21 August 2013
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % !Rnw weave = knitr
@@ -60,7 +60,11 @@ repmis::LoadandCite(pkgs = PkgsToLoad, file = "RPackages.bib")
 
 %%%%%%% Main Paper %%%%%%%%%%%%
 
-Expectations about future macroeconomic conditions such as inflation, growth and unemployment are important for monetary policymakers when they make decisions. FILL IN
+Expectations about future macroeconomic conditions such as inflation, growth and unemployment are important for monetary policymakers when they make decisions. Forecasts are especially important for price stability ``interest rates only exert their full full effect on \ldots inflation with some considerable delay'' \cite[59]{Goodhart2001}.
+
+FILL IN
+
+In this paper I aim to comprehensively understand how FOMC members forecast inflation and how these forecasts affect policy choices.
 
 \section{Previous work}
 
@@ -97,6 +101,10 @@ Third, what is the relative importance of members' strategic motivations and rul
 \subsection{Hypotheses}
 
 To model answer these questions I propose that stated monetary policy expectations and policies decisions are the outcome of a signaling game played between the FOMC members in the context of uncertainty and bounded rationality. FILL IN
+
+It is very unreasonable to expect that the signaling game takes place in a context of full information. Indeed if all of the FOMC members had full information then there would be no reason for a signaling game as deviations from the true forecast would automatically be unbelievable. Instead Fed members combine information from a number of sources including the Greenbook, individual staff research with heuristic models or rules of thumb about how the economy works. The literature on central banking and central bankers themselves includes many references to the ways monetary policymakers employ rules of thumb, particularly the Taylor rule, in their forecasting and policy decisions \cite[for example][]{Svensson2003,Orphanides2008,Leitemo2005}. 
+
+Using rules of thumb helps monetary policymakers deal with gaps in their information and the uncertainty inherent in forecasting.  However ``sometimes they lead to severe and systematic errors" \citep[][1124]{tverskykahneman1974}.
 
 \section{Data}
 
