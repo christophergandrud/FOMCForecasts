@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % FOMC Forecasts
 % Christopher Gandrud
-% 21 August 2013
+% 22 August 2013
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % !Rnw weave = knitr
@@ -109,6 +109,8 @@ Using rules of thumb helps monetary policymakers deal with gaps in their informa
 \section{Data}
 
 As mentioned earlier, the main source of data on FOMC members' forecasts comes from the semi-annual MPR they submit to Congress as well as a more limited publicly disclosed data set of individual members' predictions. FILL IN
+
+Building on \cite{Tillmann2011}, FOMC members can be considered signalers who strategically use their forecasts to influence monetary policy outcomes. The relevant information `receivers' varies depending on whether a member has voting power or not.  
 
 Data on Fed Staff's Greenbook forecasts and their predictions errors comes from the data set compiled by \cite{gandrud2013does}. These forecasts are released with a five year lag, so we only have access to forecasts made through 2007.
 
