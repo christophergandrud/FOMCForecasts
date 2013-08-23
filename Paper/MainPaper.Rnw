@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % FOMC Forecasts
 % Christopher Gandrud
-% 22 August 2013
+% 23 August 2013
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % !Rnw weave = knitr
@@ -88,6 +88,8 @@ What do we know about how FOMC predictions influence policy? \cite{Orphanides200
 
 \cite{Clark2013} examine the role of government partisanship and elections in FOMC interest rate decisions. They find a conditional relationship between the past output gap, inflation and presidents' partisan identifications as elections approach. In the lead up to elections, the FOMC is concerned more about reducing the output gap as elections near with Republican presidents and is more concerned with inflation as Democratic presidents' re-elections near. They explain this by proposing that the FOMC has a partisan preference for Republican presidents over Democratic ones and focus on growth over inflation to help improve Republicans' re-election chances. Though they examine the role of unexpected `inflation surprises' with various sets of predictions including the Survey of Professional Forecasters and the Cleveland Fed branch's model based estimates, they do not examine the role of FOMC members' expectations, which previous research has shown to deviate significantly from even in-house estimates.
 
+Looking a little further afield, \cite{Besley2008} examined how the Bank of England Monetary Policy Committee's--equivalent to the FOMC--forecasts explain members voting decisions. 
+
 \section{A comprehensive approach} 
 
 This paper aims to combine and empirically evaluate these disparate findings into one coherent understanding of how members of the FOMC come to expect future macroeconomic conditions and how this influences their policy decisions. The previous research indicates that FOMC both use their predictions strategically to influence monetary policy decisions in their favored direction, while at the same time employing `rules of thumb' to both make their predictions and use their predictions when they make policy decisions. A number of important questions remain. 
@@ -100,9 +102,17 @@ Third, what is the relative importance of members' strategic motivations and rul
 
 \subsection{Hypotheses}
 
-To model answer these questions I propose that stated monetary policy expectations and policies decisions are the outcome of a signaling game played between the FOMC members in the context of uncertainty and bounded rationality. FILL IN
+To answer these questions I propose that stated monetary policy expectations and policy decisions are the outcome of a signaling game played between the FOMC members in the context of uncertainty and bounded rationality. 
 
-It is very unreasonable to expect that the signaling game takes place in a context of full information. Indeed if all of the FOMC members had full information then there would be no reason for a signaling game as deviations from the true forecast would automatically be unbelievable. Instead Fed members combine information from a number of sources including the Greenbook, individual staff research with heuristic models or rules of thumb about how the economy works. The literature on central banking and central bankers themselves includes many references to the ways monetary policymakers employ rules of thumb, particularly the Taylor rule, in their forecasting and policy decisions \cite[for example][]{Svensson2003,Orphanides2008,Leitemo2005}. 
+\paragraph{Forecasts as Signaling}
+
+Requirements to publish forecasts and explain how policy decisions are being taken to meet objectives in light of these forecasts are has been key component of FOMC accountability since at least the 1970s.\footnote{See \cite{Goodhart2001} for a discussion in the British context.} However, this context creates the conditions for a signaling game \cite[see][]{Crawford1982,Gibbons1992}. Congressional overseers can choose between sanctioning or not sanctioning the FOMC for its policy choices in light of the FOMC's forecasts. Congress people are relatively information poor relative FOMC members. As such FOMC members have an incentive to make strategic forecasts in order to justify desired policy actions, while avoiding sanction. FILL IN
+
+However, there is likely another level to the signaling game. As \cite{Rulke2011} found, there is a further signaling game being played within the FOMC between voting and non-voting members. FILL IN
+
+Though the FOMC is often treated as having largely homogeneous preferences \cite[for example][]{Clark2013}, a number of factors members of the FOMC have different preferences from each other, particularly in regards to the inflation level; so called hawks vs. doves. This has been established in a variety of settings \cite[see][]{Hix2010}. Different preferences are closely related to different views of how the economy works. 
+
+It is very unreasonable to expect that the signaling game takes place in a context of full information. Indeed if all of the FOMC members had full information then there would be no reason for a signaling game as deviations from the true forecast would automatically be unbelievable. Instead Fed members combine information from a number of sources including the Greenbook, individual staff research with heuristic models or rules of thumb about how the economy works. The literature on central banking and central bankers themselves includes many references to the ways monetary policymakers employ rules of thumb in their forecasting and policy decisions, particularly the Taylor rule \cite[for example][]{Svensson2003,Orphanides2008,Leitemo2005}, as well as others such as the Brainard Principle \citep{Brainard1967} advocating caution given predictive uncertainty. 
 
 Using rules of thumb helps monetary policymakers deal with gaps in their information and the uncertainty inherent in forecasting.  However ``sometimes they lead to severe and systematic errors" \citep[][1124]{tverskykahneman1974}.
 

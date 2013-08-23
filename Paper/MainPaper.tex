@@ -1,12 +1,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % FOMC Forecasts
 % Christopher Gandrud
-% 21 August 2013
+% 23 August 2013
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % !Rnw weave = knitr
 
-\documentclass[a4paper]{article}\usepackage{graphicx, color}
+\documentclass[a4paper]{article}\usepackage[]{graphicx}\usepackage[]{color}
 %% maxwidth is the original width if it is less than linewidth
 %% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
@@ -19,21 +19,16 @@
 }
 \makeatother
 
-\definecolor{fgcolor}{rgb}{0.2, 0.2, 0.2}
-\newcommand{\hlnumber}[1]{\textcolor[rgb]{0,0,0}{#1}}%
-\newcommand{\hlfunctioncall}[1]{\textcolor[rgb]{0.501960784313725,0,0.329411764705882}{\textbf{#1}}}%
-\newcommand{\hlstring}[1]{\textcolor[rgb]{0.6,0.6,1}{#1}}%
-\newcommand{\hlkeyword}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
-\newcommand{\hlargument}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
-\newcommand{\hlcomment}[1]{\textcolor[rgb]{0.180392156862745,0.6,0.341176470588235}{#1}}%
-\newcommand{\hlroxygencomment}[1]{\textcolor[rgb]{0.43921568627451,0.47843137254902,0.701960784313725}{#1}}%
-\newcommand{\hlformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
-\newcommand{\hleqformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
-\newcommand{\hlassignement}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
-\newcommand{\hlpackage}[1]{\textcolor[rgb]{0.588235294117647,0.709803921568627,0.145098039215686}{#1}}%
-\newcommand{\hlslot}[1]{\textit{#1}}%
-\newcommand{\hlsymbol}[1]{\textcolor[rgb]{0,0,0}{#1}}%
-\newcommand{\hlprompt}[1]{\textcolor[rgb]{0.2,0.2,0.2}{#1}}%
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
 
 \usepackage{framed}
 \makeatletter
@@ -135,6 +130,8 @@ What do we know about how FOMC predictions influence policy? \cite{Orphanides200
 
 \cite{Clark2013} examine the role of government partisanship and elections in FOMC interest rate decisions. They find a conditional relationship between the past output gap, inflation and presidents' partisan identifications as elections approach. In the lead up to elections, the FOMC is concerned more about reducing the output gap as elections near with Republican presidents and is more concerned with inflation as Democratic presidents' re-elections near. They explain this by proposing that the FOMC has a partisan preference for Republican presidents over Democratic ones and focus on growth over inflation to help improve Republicans' re-election chances. Though they examine the role of unexpected `inflation surprises' with various sets of predictions including the Survey of Professional Forecasters and the Cleveland Fed branch's model based estimates, they do not examine the role of FOMC members' expectations, which previous research has shown to deviate significantly from even in-house estimates.
 
+Looking a little further afield, \cite{Besley2008} examined how the Bank of England Monetary Policy Committee's--equivalent to the FOMC--forecasts explain members voting decisions. 
+
 \section{A comprehensive approach} 
 
 This paper aims to combine and empirically evaluate these disparate findings into one coherent understanding of how members of the FOMC come to expect future macroeconomic conditions and how this influences their policy decisions. The previous research indicates that FOMC both use their predictions strategically to influence monetary policy decisions in their favored direction, while at the same time employing `rules of thumb' to both make their predictions and use their predictions when they make policy decisions. A number of important questions remain. 
@@ -147,13 +144,25 @@ Third, what is the relative importance of members' strategic motivations and rul
 
 \subsection{Hypotheses}
 
-To model answer these questions I propose that stated monetary policy expectations and policies decisions are the outcome of a signaling game played between the FOMC members in the context of uncertainty and bounded rationality. FILL IN
+To answer these questions I propose that stated monetary policy expectations and policy decisions are the outcome of a signaling game played between the FOMC members in the context of uncertainty and bounded rationality. 
 
-It is very unreasonable to expect that the signaling game takes place in a context of full information. Indeed if all of the FOMC members had full information then there would be no reason for a signaling game as deviations from the true forecast would automatically be unbelievable. Instead Fed members combine information from a number of sources including the Greenbook, individual staff research with heuristic models or rules of thumb about how the economy works. This helps them deal with gaps in their information and the uncertainty inherent in forecasting.  However ``sometimes they lead to severe and systematic errors" \citep[][1124]{tverskykahneman1974}. The literature on central banking and central bankers themselves includes many references to the ways monetary policymakers employ rules of thumb, particularly the Taylor rule, in their forecasting and policy decisions \cite[for example][]{Svensson2003,Orphanides2008,Leitemo2005}. 
+\paragraph{Forecasts as Signaling}
+
+Requirements to publish forecasts and explain how policy decisions are being taken to meet objectives in light of these forecasts are has been key component of FOMC accountability since at least the 1970s.\footnote{See \cite{Goodhart2001} for a discussion in the British context.} However, this context creates the conditions for a signaling game \cite[see][]{Crawford1982,Gibbons1992}. Congressional overseers can choose between sanctioning or not sanctioning the FOMC for its policy choices in light of the FOMC's forecasts. Congress people are relatively information poor relative FOMC members. As such FOMC members have an incentive to make strategic forecasts in order to justify desired policy actions, while avoiding sanction. FILL IN
+
+However, there is likely another level to the signaling game. As \cite{Rulke2011} found, there is a further signaling game being played within the FOMC between voting and non-voting members. FILL IN
+
+Though the FOMC is often treated as having largely homogeneous preferences \cite[for example][]{Clark2013}, a number of factors members of the FOMC have different preferences from each other, particularly in regards to the inflation level; so called hawks vs. doves. This has been established in a variety of settings \cite[see][]{Hix2010}. Different preferences are closely related to different views of how the economy works. 
+
+It is very unreasonable to expect that the signaling game takes place in a context of full information. Indeed if all of the FOMC members had full information then there would be no reason for a signaling game as deviations from the true forecast would automatically be unbelievable. Instead Fed members combine information from a number of sources including the Greenbook, individual staff research with heuristic models or rules of thumb about how the economy works. The literature on central banking and central bankers themselves includes many references to the ways monetary policymakers employ rules of thumb in their forecasting and policy decisions, particularly the Taylor rule \cite[for example][]{Svensson2003,Orphanides2008,Leitemo2005}, as well as others such as the Brainard Principle \citep{Brainard1967} advocating caution given predictive uncertainty. 
+
+Using rules of thumb helps monetary policymakers deal with gaps in their information and the uncertainty inherent in forecasting.  However ``sometimes they lead to severe and systematic errors" \citep[][1124]{tverskykahneman1974}.
 
 \section{Data}
 
 As mentioned earlier, the main source of data on FOMC members' forecasts comes from the semi-annual MPR they submit to Congress as well as a more limited publicly disclosed data set of individual members' predictions. FILL IN
+
+Building on \cite{Tillmann2011}, FOMC members can be considered signalers who strategically use their forecasts to influence monetary policy outcomes. The relevant information `receivers' varies depending on whether a member has voting power or not.  
 
 Data on Fed Staff's Greenbook forecasts and their predictions errors comes from the data set compiled by \cite{gandrud2013does}. These forecasts are released with a five year lag, so we only have access to forecasts made through 2007.
 
