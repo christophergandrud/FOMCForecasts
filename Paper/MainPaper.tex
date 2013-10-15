@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % FOMC Forecasts
 % Christopher Gandrud
-% 23 August 2013
+% 14 October 2013
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % !Rnw weave = knitr
@@ -60,7 +60,7 @@
 \usepackage[authoryear]{natbib}
 \usepackage{setspace}
     \doublespacing
-\usepackage[usenames,dvipsnames]{xcolor}
+%\usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{hyperref}
 \hypersetup{
     colorlinks,
@@ -84,7 +84,7 @@
 \title{Creating FOMC Governors' Expectations: Rules of Thumb, Strategy, and the Shaping of US Monetary Policy}
 
 \author{Christopher Gandrud \\
-                {\emph{Hertie School of Governance}}\footnote{Research Associate. Friedrichstra{\ss}er 180. 10117 Berlin, Germany. Email: \href{mailto:christopher.gandrud@gmail.com}{christopher.gandrud@gmail.com}. This paper was written using {\tt{knitr}} \citep{R-knitr}. It can be entirely replicated from data, analysis source code, and markup files available at: {\url{https://github.com/christophergandrud/FOMCForecasts}}.}}
+                {\emph{Hertie School of Governance}}\footnote{Postdoctoral Researcher. Friedrichstra{\ss}er 180. 10117 Berlin, Germany. Email: \href{mailto:christopher.gandrud@gmail.com}{christopher.gandrud@gmail.com}. This paper was written using {\tt{knitr}} \citep{R-knitr}. It can be entirely replicated from data, analysis source code, and markup files available at: {\url{https://github.com/christophergandrud/FOMCForecasts}}.}}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 
 \begin{document}
@@ -110,31 +110,31 @@ In this paper I aim to comprehensively understand how FOMC members forecast infl
 
 \section{Previous work}
 
-A number of papers have recently attempted to understand some part of how monetary policymakers, particularly those on the FOMC, make predictions of future macroeconomic conditions including growth, inflation, and unemployment. Most of these examine FOMC members' predictions assuming ``appropriate monetary policy'' published semi-annually--usually in February and July--in the Monetary Policy Report (MPR) as first required by the 1978  Humphrey-Hawkins Act.\footnote{The forecasts can be found at: \url{http://fraser.stlouisfed.org/topics/?tid=87} (accessed Summer 2013) as additional material submitted as part of the Federal Reserve's testimony to Congress.} FOMC members' forecasts have been published since July 1979 and are available through the current year.\footnote{Though the Humphrey-Hawkins Act expired in 2000, the reporting requirement was continued as part of the American Homeownership and Economic Opportunity Act.} For the years 1992 through 2002 first \cite{Romer2010Data} then the Federal Reserve itself has also made available the predictions of individual members.\footnote{See: \url{http://www.philadelphiafed.org/research-and-data/real-time-center/monetary-policy-projections/} (accessed Summer 2013). There is a ten year lag in the release of these figures.} I'll refer to this data as individual projects for the Monetary Policy Report (IMPR) Researchers have used these data sets to examine a number of questions regarding how the predictions are formed and what consequences they have for monetary policy choices. 
+A number of papers have recently attempted to understand some part of how monetary policymakers, particularly those on the FOMC, make predictions of future macroeconomic conditions including growth, inflation, and unemployment. Most of these examine FOMC members' predictions assuming ``appropriate monetary policy'' published semi-annually--usually in February and July--in the Monetary Policy Report (MPR) as first required by the 1978  Humphrey-Hawkins Act.\footnote{The forecasts can be found at: \url{http://fraser.stlouisfed.org/topics/?tid=87} (accessed Summer 2013) as additional material submitted as part of the Federal Reserve's testimony to Congress.} FOMC members' forecasts have been published since July 1979 and are available through the current year.\footnote{Though the Humphrey-Hawkins Act expired in 2000, the reporting requirement was continued as part of the American Homeownership and Economic Opportunity Act.} For the years 1992 through 2002 first \cite{Romer2010Data} then the Federal Reserve itself has also made available the predictions of individual members.\footnote{See: \url{http://www.philadelphiafed.org/research-and-data/real-time-center/monetary-policy-projections/} (accessed Summer 2013). There is a ten year lag in the release of these figures.} I'll refer to this data as individual projections for the Monetary Policy Report (IMPR). Researchers have used these data sets to examine a number of questions regarding how the predictions are formed and what consequences they have for monetary policy choices. 
 
 \subsection{Research on stated expectations}
 
-What do we know about how the FOMC members' predict inflation? \cite{RomerRomer2008} examined whether FOMC members added value to Fed staff forecasts with their own information and views of how the economy works. FOMC members are presented with Fed Staff forecasts presented in the so-called Greenbook before they make their predictions. \cite{RomerRomer2008} found that rather than adding value or deviating only trivially from the Greenbook forecasts mean FOMC members' forecasts actually are much worse. These findings are corroborated by \cite{Gavin2003} who found that, while more accurate than private sector forecasts, FOMC predictions preformed worse than their staff's. Neither paper significantly addresses the question of why the FOMC's forecasts are relatively poor. 
+What do we know about how the FOMC members' predict inflation? \cite{RomerRomer2008} examined whether FOMC members added value to Fed staff forecasts with their own information and views of how the economy works. FOMC members are presented with Fed Staff forecasts in the so-called Greenbook before they make their predictions. \cite{RomerRomer2008} found that rather than adding value or deviating only trivially from the Greenbook forecasts mean FOMC members' forecasts actually are much worse. These findings are corroborated by \cite{Gavin2003} who found that, while more accurate than private sector forecasts, FOMC predictions preformed worse than their staff's. Neither paper significantly addresses the question of why the FOMC's forecasts are relatively poor. 
 
 In a series of papers Peter Tillman recently used IMPR data from 1992 through 1998 to look at how members adapt to changing economic conditions, the role of herding and whether a member holds a voting or non-voting position on the FOMC.\footnote{Only five of the regional governors have voting rights in any given year.} \cite{Tillmann2010Philips} examined the changing use of the Phillips Curve relationship between unemployment and inflation by FOMC members to predict inflation. The Phillips Curve `flattened' from the 1980s \citep{Atkeson2001}. Tillmann finds that FOMC members gradually updated their forecasts in accordance with this change. Similarly, he examined whether FOMC forecasts use Okun's law \citeyearpar{Okun1962}--or ``rule of thumb'' \citep{KnotekII2007}--regarding the negative relationship between growth and unemployment. The slope of the relationship decreased considerably during the 1990s, e.g. the relationship between growth and unemployment weakened. Tillman finds that, as with a weakening Philips, FOMC members' adapted their forecasts to the changing nature of the relationship between unemployment and growth. 
 
-\cite{Tillmann2011} examined not only FOMC's use and adaptation of economic rules of thumb, but also members' strategic motivations for making the forecasts they do. He found that non-voting members strategically using their forecasts to move decisions closer to their preferences for tight or loose monetary policy. Non-voting members who prefer tighter monetary policy over-predicted inflation compared to the mean forecast, while non-voting members with a loose preferences under-predicted. Voting members have incentives to send more accurate forecasts as they both do not need to over or under-predict as they can obviously influence policy with their vote and could pay a higher cost for inaccurately forecasting as they will be under greater scrutiny from their fellow board members. \cite{Rulke2011} examined whether FOMC members' forecasts exhibited herding--i.e. whether or not they tended to cluster together.\footnote{Though submitted simultaneously, FOMC members' can later revise their forecasts.} They did not find evidence for herding and, for inflation forecasts found anti-herding behaviour among non-voting members, corroborating Tillmann's \citeyearpar{Tillmann2011} findings. 
+\cite{Tillmann2011} examined not only FOMC's use and adaptation of economic rules of thumb, but also members' strategic motivations for making the forecasts they do. He found that non-voting members strategically use their forecasts to move decisions closer to their preferences for tight or loose monetary policy. Non-voting members who prefer tighter monetary policy over-predicted inflation compared to the mean forecast, while non-voting members with a loose preferences under-predicted. Voting members have incentives to send more accurate forecasts as they both do not need to use their forecasts to impact policy--they can obviously influence policy with their vote--and could pay a higher cost for inaccurately forecasting because they will be under greater scrutiny from their fellow board members. \cite{Rulke2011} examined whether FOMC members' forecasts exhibited herding--i.e. whether or not they tended to cluster together.\footnote{Though submitted simultaneously, FOMC members' can later revise their forecasts.} They did not find evidence for herding and, for inflation forecasts found anti-herding behaviour among non-voting members, corroborating Tillmann's \citeyearpar{Tillmann2011} findings. 
 
-Similarly, \cite{Banternghansa2009} examined the degree of disagreement among FOMC members' forecasts, particularly in terms of position and voting status as well as compared to private sector forecasts. In their limited (1992-1998) data set they find a number of regularities, such as the Vice Chair having a relatively central prediction as well as the tendencies of regional Fed presidents. They also find that the level of disagreement within the FOMC is less that the disagreement between it and private sector forecasters. The generalizability of the positional findings are questionable given the short time span covered by their data. 
+Similarly, \cite{Banternghansa2009} examined the degree of disagreement among FOMC members' forecasts, particularly in terms of position and voting status as well as compared to private sector forecasts. In their limited (1992-1998) data set they find a number of regularities, such as the Vice Chair having a relatively central prediction as well as the tendencies of regional Fed presidents. They also find that the level of disagreement within the FOMC is less than the disagreement between it and private sector forecasters. The generalizability of the positional findings are questionable given the short time span covered by their data. 
 
 Focusing exclusively on Federal Reserve staff's Greenbook forecasts, rather than FOMC predictions, \cite{gandrud2013does} found that a large proportion of the error Fed staff made when forecasting inflation is caused by a partisan heuristic. Democratic presidents are expected to implement policies that reduce unemployment, but increase inflation. Republican presidents, conversely are expected to enact inflation reducing policies. However, because the true difference between the parties' economic policies is actually rather small \citep{Bartels2008}, Fed staff with a partisan heuristic tend to overestimate inflation during Democratic presidencies and underestimate it during Republican ones. Unlike other rules of thumb like the Phillips Curve or Okun's Law, the partisan inflation heuristic has been persistent, at least through 2007, despite its inefficacy.
 
 \subsection{Research on policy decisions using stated expectations}
 
-What do we know about how FOMC predictions influence policy? \cite{Orphanides2008} looked at whether FOMC members' incorporated their predictions of future macroeconomic conditions into  a heuristic 'rule of thumb' based on the Taylor rule \citeyearpar{Taylor1993} to make interest rate decisions. They found, again using the mean MPR forecast value, that rather than relying on observed outcomes FOMC policymakers did indeed draw on members' forecasts.   
+What do we know about how FOMC predictions influence policy? \cite{Orphanides2008} looked at whether FOMC members' incorporated their predictions of future macroeconomic conditions into  a heuristic `rule of thumb' based on the Taylor rule \citeyearpar{Taylor1993} to make interest rate decisions. They found, again using the mean MPR forecast value, that rather than relying on observed outcomes FOMC policymakers did indeed draw on members' forecasts of Taylor rule variables, inflation, GDP, and potential GDP.   
 
-\cite{Clark2013} examine the role of government partisanship and elections in FOMC interest rate decisions. They find a conditional relationship between the past output gap, inflation and presidents' partisan identifications as elections approach. In the lead up to elections, the FOMC is concerned more about reducing the output gap as elections near with Republican presidents and is more concerned with inflation as Democratic presidents' re-elections near. They explain this by proposing that the FOMC has a partisan preference for Republican presidents over Democratic ones and focus on growth over inflation to help improve Republicans' re-election chances. Though they examine the role of unexpected `inflation surprises' with various sets of predictions including the Survey of Professional Forecasters and the Cleveland Fed branch's model based estimates, they do not examine the role of FOMC members' expectations, which previous research has shown to deviate significantly from even in-house estimates.
+\cite{Clark2013} examine the role of government partisanship and elections in FOMC interest rate decisions. They find a conditional relationship between the past output gap, inflation and presidents' partisan identifications as elections approach. The FOMC is concerned more about reducing the output gap as elections near with Republican presidents and is more concerned with inflation as Democratic presidents' re-elections near. They explain this by proposing that the FOMC has a partisan preference for Republican presidents over Democratic ones and focus on growth over inflation to help improve Republicans' re-election chances. Though they examine the role of unexpected `inflation surprises' with various sets of predictions including the Survey of Professional Forecasters and the Cleveland Fed branch's model based estimates, they do not examine the role of FOMC members' expectations, which previous research has shown to deviate significantly from even in-house estimates.
 
 Looking a little further afield, \cite{Besley2008} examined how the Bank of England Monetary Policy Committee's--equivalent to the FOMC--forecasts explain members voting decisions. 
 
 \section{A comprehensive approach} 
 
-This paper aims to combine and empirically evaluate these disparate findings into one coherent understanding of how members of the FOMC come to expect future macroeconomic conditions and how this influences their policy decisions. The previous research indicates that FOMC both use their predictions strategically to influence monetary policy decisions in their favored direction, while at the same time employing `rules of thumb' to both make their predictions and use their predictions when they make policy decisions. A number of important questions remain. 
+This paper aims to combine and empirically evaluate these disparate findings into one coherent understanding of how members of the FOMC come to expect future macroeconomic conditions and how this influences their policy decisions. Previous research indicates that FOMC members both use their predictions strategically to influence monetary policy decisions in their favored direction, while at the same time employing `rules of thumb' to both make their predictions and use their predictions when they make policy decisions. A number of important questions remain. 
 
 First, to what extent does the partisan composition of government, especially the presidency influence members' forecasts? Do FOMC members employ the same partisan heuristic that \cite{gandrud2013does} found Fed staff using? Perhaps given the heterogeneous nature of how the FOMC's membership the partisan heuristic is employed differently by members with different monetary preferences. For example, the partisan heuristic could be stronger for inflation hawks may be even more worried about the possible inflationary consequences of Democratic presidents' policies and overestimate inflation even more during these periods. Inflation doves might downplay the inflationary risks of Democratic presidents and more accurately estimate inflation during these periods or even underestimate it. Is the use of the partisan bias as persistent for FOMC members as their staff, or do they more quickly adapt their expectations to different presidents' policies?
 
@@ -168,6 +168,24 @@ Data on Fed Staff's Greenbook forecasts and their predictions errors comes from 
 
 
 \section{Analysis \& results}
+
+\begin{figure}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=0.95\linewidth]{figure/unnamed-chunk-1} 
+
+}
+
+
+
+\end{knitrout}
+
+
+{\scriptsize{The dashed line shows the actual level.}}
+
+\end{figure}
 
 \section*{Discussion}
 
