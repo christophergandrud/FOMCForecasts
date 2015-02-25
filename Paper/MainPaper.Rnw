@@ -51,7 +51,7 @@ repmis::LoadandCite(pkgs = PkgsToLoad, file = "RPackages.bib")
 
 %%%%%%% Abstract %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-    Expectations about future macroeconomic conditions such as inflation, growth and unemployment are important for monetary policymakers when they make decisions. What influences these expectations and to what extent do expectations effect policy choices? This paper aims to answer these questions by proposing that stated monetary policy expectations and policies decisions are the outcome of a signaling game played between the FOMC members in the context of uncertainty and bounded rationality. I empirically evaluate this approach with data on US Federal Open Markets Committee members' predictions from 1979 through 2013. FILL IN FINDINGS
+    Expectations about future macroeconomic conditions such as inflation, growth and unemployment are important for monetary policymakers when they make decisions. What influences these expectations and to what extent do expectations effect policy choices? This paper aims to answer these questions by proposing that stated monetary policy expectations and policy decisions are the outcome of a signaling game played between the FOMC members in the context of uncertainty. I empirically evaluate this approach with data on US Federal Open Markets Committee members' predictions from 1979 through 2013. FILL IN FINDINGS
 \end{abstract}
 
 \begin{description}
